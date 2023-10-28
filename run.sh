@@ -15,5 +15,5 @@ if [ "$SCHEMA_TYPE" == "mysql" ]; then
   RDS_ENDPOINT=$(aws ssm get-parameters  --names prod.rds.db_host --with-decryption | jq .Parameters[].Value | sed -e 's/"//g')
   RDS_USER=$(aws ssm get-parameters  --names prod.rds.db_user --with-decryption | jq .Parameters[].Value | sed -e 's/"//g')
   RDS_PASS=$(aws ssm get-parameters  --names prod.rds.db_pass --with-decryption | jq .Parameters[].Value | sed -e 's/"//g')
-  mysql -h ${RDS_ENDPOINT}  -u${RDS_USER} -p${RDS_PASS} <schema/${COMPONENT}.sql
+  mysql -h ${RDS_ENDPOINT}  -u${RDS_USER} -p${RDS_PASS} < schema/${COMPONENT}.sql
 fi
